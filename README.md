@@ -92,15 +92,10 @@ java -jar target/minimanimo-1.0-SNAPSHOT.jar
 ### 3.1. Core Class Structure & Roles
 
 | Class/Module | Role |
-
 |--------------|-------|
-
 | MiniGame (Interface) | Defines the basic contract of game features and provides the required methods that each mini-game must implement. |
-
 | User (Class) | Stores the user's nickname and best score data for each game. |
-
 | UserManager | Handles CSV data management, nickname authentication, score updates, and ranking logic. |
-
 | GameLauncher | Entry point of the program; manages user menus and main game flow. |
 
 
@@ -114,15 +109,10 @@ All mini-games are played against the computer (random logic).
 The game ends either upon a loss (ChamChamCham, Rock-Paper-Scissors) or upon success (Number Baseball, Number Up-Down).
 
 | No. | Game Name | Ranking Criteria (Goal) |
-
 |-----|-----------|-------------------------|
-
 | 1 | Cham Cham Cham | Number of successful rounds (consecutive) |
-
 | 2 | Rock Paper Scissors | Win streak count | 
-
 | 3 | Number Baseball | Remaining attempts (10 – attempts used) | 
-
 | 4 | Number UpDown | Remaining attempts (10 – attempts used) | 
 
 
@@ -171,15 +161,10 @@ Our team ensures project stability through a professional collaboration workflow
   For security vulnerabilities or Code of Conduct violations, please contact:
 
 | Responsibility      | Name           | Email                  |
-
 |----------------------------|----------------|------------------------|
-
 | Interface Design (`MiniGame`), `Number Baseball` Logic. | Kim Gyeongyoon | gracekim6531@naver.com |
-
 | `UserManager` (CSV I/O), Unit Tests, `Number UpDown`. | Choi Juyoung | hahalove79@naver.com |
-
 | `User` Class, Ranking Logic, `Cham Cham Cham`, Kanban & CI Mgmt. | Kwon Sihyeon | sihyun050305@gmail.com |
-
 | `GameLauncher` (Menu/Login), `Rock Paper Scissors`, Branch Protection. | Park Soyeon | amypark310@gmail.com |
 
 
