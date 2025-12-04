@@ -1,6 +1,7 @@
 package minimanimo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
@@ -48,5 +49,19 @@ public class UserTest {
         user.updateScore("Baseball", 50);  
         
         assertEquals(100, user.getScore("Baseball")); 
+    }
+
+    @Test
+    void testValidation() {
+
+        assertThrows(IllegalArgumentException.class, () -> new User(null));
+
+        assertThrows(IllegalArgumentException.class, () -> new User(""));
+
+        assertThrows(IllegalArgumentException.class, () -> new User("   "));
+
+        User user = new User("ValidUser");
+        assertThrows(IllegalArgumentException.class, () -> user.getScore(null));
+        assertThrows(IllegalArgumentException.class, () -> user.updateScore(null, 100));
     }
 }
