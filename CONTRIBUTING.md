@@ -12,32 +12,39 @@ We are sticking to the standard Maven layout to keep things familiar.
 A quick review of folders:
 
 ```text
-Minimanimo/
- ├── .github/
- │    ├── workflows/
- │    │    └── maven.yml      (CI: GitHub Actions Config)
- │    └── PULL_REQUEST_TEMPLATE.md (PR Template)
- │
- ├── src/
- │    ├── main/java/
- │    │    └── minimanimo/    (Main Package)
- │    │         ├── GameLauncher.java
- │    │         ├── UserManager.java
- │    │         ├── User.java
- │    │         ├── MiniGame.java  (Interface)
- │    │         └── games/         (Game Implementations)
- │    │
- │    └── test/java/
- │         └── minimanimo/    (Test Package - Must match Main)
- │              └── UserManagerTest.java
- │
- ├── pom.xml                  (Build: Dependencies & Plugins)
- ├── users.csv                (Data: User Scores DB)
- ├── .gitignore               (Git Ignore Rules)
- ├── README.md                (Project Overview & Setup)
- ├── LICENSE                  (License Terms)
- ├── CODE_OF_CONDUCT.md       (Community Standards)
- └── CONTRIBUTING.md          (Dev Guide & Workflow)
+minimanimo/
+├── .github/                        
+│   ├── workflows/
+│   │   └── maven.yml               
+│   └── PULL_REQUEST_TEMPLATE.md   
+│
+├── src/
+│   ├── main/java/minimanimo/      
+│   │   ├── GameLauncher.java       
+│   │   ├── User.java               
+│   │   ├── UserManager.java       
+│   │   └── game/                  
+│   │       ├── MiniGame.java         
+│   │       ├── RockPaperScissors.java  
+│   │       ├── NumberBaseball.java     
+│   │       ├── UpDown.java           
+│   │       └── ChamChamCham.java      
+│   │
+│   └── test/java/minimanimo/      
+│       ├── UserManagerTest.java
+│       └── game/
+│           ├── RockPaperScissorsTest.java
+│           ├── NumberBaseballTest.java
+│           ├── UpDownTest.java
+│           └── ChamChamChamTest.java
+│
+├── users.csv                      
+├── pom.xml                       
+├── .gitignore
+├── LICENSE
+├── README.md
+├── CONTRIBUTING.md
+└── CODE_OF_CONDUCT.md
 ```
 
 ---
@@ -134,7 +141,7 @@ Please assign at least one label when creating an issue:
 -   **java version**: `JDK 17` or higher.
 -   **Naming**: `PascalCase` for Classes, `camelCase` for methods.
 -   **Encoding**: All files must be **UTF-8**.
--   **Testing**: At least **one JUnit test** is required (Issue #2).
+-   **Testing**: At least **one JUnit test** is required.
 -   **Data**: Do not change the `users.csv` header. (Nickname,ChamChamCham,RPS,Baseball,UpDown)
 
 ---
