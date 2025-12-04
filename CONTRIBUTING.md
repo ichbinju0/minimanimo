@@ -32,6 +32,7 @@ minimanimo/
 │   │
 │   └── test/java/minimanimo/      
 │       ├── UserManagerTest.java
+│       ├── UserTest.java
 │       └── game/
 │           ├── RockPaperScissorsTest.java
 │           ├── NumberBaseballTest.java
