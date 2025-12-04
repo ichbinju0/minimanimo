@@ -5,7 +5,7 @@ import java.util.*;
 
 public class UserManager {
 
-    private static final String CSV_FILE = "users.csv";
+    private String csvFile = "users.csv";
     private static final String[] GAMES = { "ChamChamCham", "RPS", "Baseball", "UpDown" };
     private static final String HEADER = "Nickname,ChamChamCham,RPS,Baseball,UpDown";
 
@@ -16,9 +16,15 @@ public class UserManager {
         loadUsers();
     }
 
+    public UserManager(String testFileName) {
+        this.csvFile = testFileName; // Convert to use test file
+        this.users = new ArrayList<>();
+        loadUsers();
+    }
+
     public void loadUsers() { // Load users from CSV
         users.clear();
-        File file = new File(CSV_FILE);
+        File file = new File(csvFile);
 
         if (!file.exists()) { // If file doesn't exist, initialize empty list
             System.out.println("[INFO] Data file not found. Initializing with empty list.");
@@ -61,7 +67,7 @@ public class UserManager {
     }
 
     public void saveUsers() { // Save users to CSV
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(CSV_FILE))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile))) {
             bw.write(HEADER);
             bw.newLine();
 
