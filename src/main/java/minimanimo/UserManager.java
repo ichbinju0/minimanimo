@@ -10,16 +10,16 @@ public class UserManager {
 
     private List<User> users;
 
-    public UserManager() {
+    public UserManager() { // Constructor
         this.users = new ArrayList<>();
         loadUsers();
     }
 
-    public void loadUsers() {
+    public void loadUsers() { // Load users from CSV
         users.clear();
         File file = new File(CSV_FILE);
 
-        if (!file.exists()) {
+        if (!file.exists()) { // If file doesn't exist, initialize empty list
             System.out.println("[INFO] Data file not found. Initializing with empty list.");
             return;
         }
@@ -58,7 +58,7 @@ public class UserManager {
         }
     }
 
-    public void saveUsers() {
+    public void saveUsers() { // Save users to CSV
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(CSV_FILE))) {
             bw.write(HEADER);
             bw.newLine();
@@ -78,7 +78,7 @@ public class UserManager {
         }
     }
 
-    public void addUser(String nickname) {
+    public void addUser(String nickname) { // Add new user
         if (nickname == null || nickname.trim().isEmpty()) {
             System.out.println("[ERROR] Nickname cannot be empty.");
             return;
@@ -91,7 +91,7 @@ public class UserManager {
         saveUsers();
     }
 
-    public User getUser(String nickname) {
+    public User getUser(String nickname) { // Retrieve user by nickname
         for (User user : users) {
             if (user.getNickname().equals(nickname)) {
                 return user;

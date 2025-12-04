@@ -16,18 +16,18 @@ class UserManagerTest {
     private final String CSV_FILE = "users.csv";
 
     @BeforeEach
-    void setUp() throws IOException {
+    void setUp() throws IOException { // Ensure clean state before each test
         Files.deleteIfExists(Path.of(CSV_FILE));
         userManager = new UserManager();
     }
 
     @AfterEach
-    void tearDown() throws IOException {
+    void tearDown() throws IOException { // Clean up after each test
         Files.deleteIfExists(Path.of(CSV_FILE));
     }
 
     @Test
-    void testAddAndGetUser() {
+    void testAddAndGetUser() { // Test adding and retrieving a user
         String nickname = "TestUser";
 
         userManager.addUser(nickname);
@@ -38,7 +38,7 @@ class UserManagerTest {
     }
 
     @Test
-    void testDataPersistence() {
+    void testDataPersistence() { // Test data persistence across UserManager instances
         userManager.addUser("PersistenceUser");
 
         UserManager newManager = new UserManager();
@@ -49,7 +49,7 @@ class UserManagerTest {
     }
 
     @Test
-    void testDuplicateUserCheck() {
+    void testDuplicateUserCheck() { // Test handling of duplicate user addition
         String nickname = "DoubleUser";
         userManager.addUser(nickname);
 
@@ -59,7 +59,7 @@ class UserManagerTest {
     }
 
     @Test
-    void testInvalidUser() {
+    void testInvalidUser() { // Test handling of invalid user addition
         userManager.addUser("");
         userManager.addUser(null);
 
@@ -68,7 +68,7 @@ class UserManagerTest {
     }
 
     @Test
-    void testCsvFormatIntegrity() {
+    void testCsvFormatIntegrity() { // Test CSV format integrity after saving users
         userManager.addUser("CsvCheck");
         User user = userManager.getUser("CsvCheck");
         user.updateScore("ChamChamCham", 10);
