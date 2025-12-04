@@ -34,4 +34,19 @@ public class UserTest {
         user.updateScore("ChamChamCham", 90);
         assertEquals(90, user.getScore("ChamChamCham"));
     }
+
+    @Test
+    void testEdgeCases() {
+        User user = new User("EdgeUser");
+
+
+        int score = user.getScore("GhostGame"); 
+        assertEquals(0, score);
+
+
+        user.updateScore("Baseball", 100); 
+        user.updateScore("Baseball", 50);  
+        
+        assertEquals(100, user.getScore("Baseball")); 
+    }
 }
