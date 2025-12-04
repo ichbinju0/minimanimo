@@ -27,11 +27,7 @@ public class User {
     }
 
 
-    public int getTotalScore() {
-        int total = 0;
-        for (int score : scoreMap.values()) {
-            total += score;
-        }
-        return total;
+    public int getScore(String gameName) {
+        return scoreMap.getOrDefault(gameName, 0);
     }
 }
