@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserManagerTest {
 
     private UserManager userManager;
-    private final String CSV_FILE = "users.csv";
+    private final String CSV_FILE = "test_users.csv";
 
     @BeforeEach
     void setUp() throws IOException { // Ensure clean state before each test
         Files.deleteIfExists(Path.of(CSV_FILE));
-        userManager = new UserManager();
+        userManager = new UserManager(CSV_FILE);
     }
 
     @AfterEach

@@ -5,15 +5,14 @@ import java.util.*;
 
 public class UserManager {
 
-    private String csvFile = "users.csv";
+    private String csvFile;
     private static final String[] GAMES = { "ChamChamCham", "RPS", "Baseball", "UpDown" };
     private static final String HEADER = "Nickname,ChamChamCham,RPS,Baseball,UpDown";
 
     private List<User> users;
 
     public UserManager() { // Constructor
-        this.users = new ArrayList<>();
-        loadUsers();
+        this("users.csv");
     }
 
     public UserManager(String testFileName) {
