@@ -1,11 +1,80 @@
 package minimanimo;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserManagerTest {
+
+    private UserManager userManager;
+    private final String CSV_FILE = "users.csv";
+
+    @BeforeEach
+    void setUp() throws IOException {
+        Files.deleteIfExists(Path.of(CSV_FILE));
+        userManager = new UserManager();
+    }
+
+    @AfterEach
+    void tearDown() throws IOException {
+        Files.deleteIfExists(Path.of(CSV_FILE));
+    }
+
     @Test
-    void tempTest() {
-        assertTrue(true);
+    void testAddAndGetUser() {
+        String nickname = "TestUser";
+
+        userManager.addUser(nickname);
+        User retrievedUser = userManager.getUser(nickname);
+
+        assertNotNull(retrievedUser);
+        assertEquals(nickname, retrievedUser.getNickname());
+    }
+
+    @Test
+    void testDataPersistence() {
+        userManager.addUser("PersistenceUser");
+
+        UserManager newManager = new UserManager();
+        User loadedUser = newManager.getUser("PersistenceUser");
+
+        assertNotNull(loadedUser);
+        assertEquals("PersistenceUser", loadedUser.getNickname());
+    }
+
+    @Test
+    void testDuplicateUserCheck() {
+        String nickname = "DoubleUser";
+        userManager.addUser(nickname);
+
+        userManager.addUser(nickname);
+
+        assertNotNull(userManager.getUser(nickname));
+    }
+
+    @Test
+    void testInvalidUser() {
+        userManager.addUser("");
+        userManager.addUser(null);
+
+        assertNull(userManager.getUser(""));
+        assertNull(userManager.getUser(null));
+    }
+
+    @Test
+    void testCsvFormatIntegrity() {
+        userManager.addUser("CsvCheck");
+        User user = userManager.getUser("CsvCheck");
+        user.updateScore("ChamChamCham", 10);
+        userManager.saveUsers();
+
+        File file = new File(CSV_FILE);
+        assertTrue(file.exists());
     }
 }
