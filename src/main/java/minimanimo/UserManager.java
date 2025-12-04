@@ -6,6 +6,7 @@ import java.util.*;
 public class UserManager {
 
     private static final String CSV_FILE = "users.csv";
+    private static final String[] GAMES = { "ChamChamCham", "RPS", "Baseball", "UpDown" };
     private static final String HEADER = "Nickname,ChamChamCham,RPS,Baseball,UpDown";
 
     private List<User> users;
@@ -42,10 +43,11 @@ public class UserManager {
                     String nickname = data[0].trim();
                     User user = new User(nickname);
 
-                    user.updateScore("ChamChamCham", Integer.parseInt(data[1].trim()));
-                    user.updateScore("RPS", Integer.parseInt(data[2].trim()));
-                    user.updateScore("Baseball", Integer.parseInt(data[3].trim()));
-                    user.updateScore("UpDown", Integer.parseInt(data[4].trim()));
+                    for (int i = 0; i < GAMES.length; i++) {
+                        if (i + 1 < data.length) {
+                            user.updateScore(GAMES[i], Integer.parseInt(data[i + 1].trim()));
+                        }
+                    }
 
                     users.add(user);
 
@@ -64,13 +66,11 @@ public class UserManager {
             bw.newLine();
 
             for (User user : users) {
-                String line = String.format("%s,%d,%d,%d,%d",
-                        user.getNickname(),
-                        user.getScore("ChamChamCham"),
-                        user.getScore("RPS"),
-                        user.getScore("Baseball"),
-                        user.getScore("UpDown"));
-                bw.write(line);
+                StringBuilder line = new StringBuilder(user.getNickname());
+                for (String game : GAMES) {
+                    line.append(",").append(user.getScore(game));
+                }
+                bw.write(line.toString());
                 bw.newLine();
             }
         } catch (IOException e) {
