@@ -30,9 +30,10 @@ minimanimo/
 │   │       ├── UpDown.java           
 │   │       └── ChamChamCham.java      
 │   │
-│   └── test/java/minimanimo/      
-│       ├── UserManagerTest.java
+│   └── test/java/minimanimo/
+│       ├── GameLauncherTest.java   
 │       ├── UserTest.java
+│       ├── UserManagerTest.java
 │       └── game/
 │           ├── RockPaperScissorsTest.java
 │           ├── NumberBaseballTest.java
