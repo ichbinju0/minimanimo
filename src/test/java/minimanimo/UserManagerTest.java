@@ -109,4 +109,16 @@ class UserManagerTest {
         }
     }
 
+    @Test // Visual test for ranking display
+    void testShowTop5Ranking() {
+        userManager.addUser("PlayerA");
+        userManager.getUser("PlayerA").getScoreMap().put("RPS", 100);
+
+        userManager.addUser("PlayerB");
+        userManager.getUser("PlayerB").getScoreMap().put("RPS", 50);
+
+        System.out.println("=== Test Ranking ===");
+        userManager.showTop5("RPS");
+        System.out.println("========================");
+    }
 }

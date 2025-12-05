@@ -50,7 +50,7 @@ public class UserManager {
 
                     for (int i = 0; i < GAMES.length; i++) {
                         if (i + 1 < data.length) {
-                            user.updateScore(GAMES[i], Integer.parseInt(data[i + 1].trim()));
+                            user.getScoreMap().put(GAMES[i], Integer.parseInt(data[i + 1].trim()));
                         }
                     }
 
@@ -107,5 +107,32 @@ public class UserManager {
 
     public int getUserCount() { // Get total user count
         return users.size();
+    }
+
+    public void showTop5(String gameName) { // Display top 5 users for a game
+        if (users.isEmpty()) {
+            System.out.println("[INFO] No users available.");
+            return;
+        }
+        List<User> sortedUsers = new ArrayList<>(this.users);
+        sortedUsers.sort((u1, u2) -> {
+            int score1 = u1.getScore(gameName);
+            int score2 = u2.getScore(gameName);
+            return score2 - score1;
+        });
+
+        System.out.println("[INFO] Top 5 users for " + gameName + ":");
+        System.out.println("--------------------------------------");
+
+        System.out.println("  Rank  |     Nickname     |  Score ");
+        System.out.println("--------------------------------------");
+
+        int limit = Math.min(sortedUsers.size(), 5);
+        for (int i = 0; i < limit; i++) {
+            User u = sortedUsers.get(i);
+            System.out.printf("   %2d   |  %-14s  |  %5d \n",
+                    (i + 1), u.getNickname(), u.getScore(gameName));
+        }
+        System.out.println("--------------------------------------");
     }
 }
