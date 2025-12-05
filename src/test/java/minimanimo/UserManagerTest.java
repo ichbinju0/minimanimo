@@ -42,7 +42,7 @@ class UserManagerTest {
     void testDataPersistence() { // Test data persistence across UserManager instances
         userManager.addUser("PersistenceUser");
 
-        UserManager newManager = new UserManager("test_users.csv");
+        UserManager newManager = new UserManager(CSV_FILE);
         User loadedUser = newManager.getUser("PersistenceUser");
 
         assertNotNull(loadedUser);
