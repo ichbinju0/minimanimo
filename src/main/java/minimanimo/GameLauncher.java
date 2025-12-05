@@ -73,7 +73,7 @@ public class GameLauncher {
                     isRunning = false;
                     continue; // Break the loop
                 default:
-                    System.out.println("⚠️ Invalid selection. Please try again.");
+                    System.out.println("Invalid selection. Please try again.");
                     continue;
             }
 
@@ -94,9 +94,9 @@ public class GameLauncher {
                 if (newScore > currentBestScore) {
                      // Assuming User has a method to update the score map
                      currentUser.getScoreMap().put(gameName, newScore); 
-                     System.out.println("🎉 New High Score! Updated in database.");
+                     System.out.println("New High Score! Updated in database.");
                 } else {
-                     System.out.println("🙂 Good game! (Best Score: " + currentBestScore + ")");
+                     System.out.println("Good game! (Best Score: " + currentBestScore + ")");
                 }
 
                 // Save to CSV immediately
@@ -120,9 +120,9 @@ public class GameLauncher {
         User user = userManager.getUser(nickname);
         if (user != null) {
             currentUser = user;
-            System.out.println("✅ Login Successful!");
+            System.out.println("Login Successful!");
         } else {
-            System.out.println("⛔ User not found. Please register first.");
+            System.out.println("User not found. Please register first.");
         }
     }
 
@@ -133,26 +133,26 @@ public class GameLauncher {
 
             // Validation 1: Empty Check
             if (nickname.isEmpty()) {
-                System.out.println("⚠️ Nickname cannot be empty.");
+                System.out.println("Nickname cannot be empty.");
                 continue;
             }
 
             // Validation 2: Regex (English letters and numbers only)
             if (!nickname.matches("^[a-zA-Z0-9]+$")) {
-                System.out.println("⚠️ Invalid format. No spaces or special characters allowed.");
+                System.out.println("Invalid format. No spaces or special characters allowed.");
                 continue;
             }
 
             // Validation 3: Duplicate Check
             if (userManager.getUser(nickname) != null) {
-                System.out.println("⚠️ Nickname already exists. Please choose another.");
+                System.out.println("Nickname already exists. Please choose another.");
                 continue;
             }
 
             // Create and Login
             userManager.addUser(nickname);
             currentUser = userManager.getUser(nickname);
-            System.out.println("✅ Registration successful! You are now logged in.");
+            System.out.println("Registration successful! You are now logged in.");
             break;
         }
     }

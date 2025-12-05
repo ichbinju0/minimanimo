@@ -11,7 +11,7 @@ public class NumberBaseball implements MiniGame {
 
     @Override
     public int startGame(User user, Scanner scanner) {
-        System.out.println("Number Baseball Game: not develpoed yet.");
+        System.out.println("Number Baseball Game: Not develpoed yet.");
         return 0; 
     }
 
