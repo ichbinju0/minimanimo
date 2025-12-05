@@ -109,4 +109,17 @@ class UserManagerTest {
         }
     }
 
+    @Test
+    void testShowTop5Ranking() {
+        // 랭킹 출력 기능 테스트 (에러 없이 실행되는지 확인)
+        userManager.addUser("PlayerA");
+        userManager.getUser("PlayerA").getScoreMap().put("RPS", 100);
+
+        userManager.addUser("PlayerB");
+        userManager.getUser("PlayerB").getScoreMap().put("RPS", 50);
+
+        System.out.println("=== Test Ranking ===");
+        userManager.showTop5("RPS");
+        System.out.println("========================");
+    }
 }
