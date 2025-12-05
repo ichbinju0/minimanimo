@@ -1,6 +1,5 @@
 package minimanimo;
 
-
 import minimanimo.game.*;
 
 import java.util.ArrayList;
@@ -8,17 +7,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GameLauncher {
-   
+
     private static Scanner scanner; // For GameLaungherTest.java's test
     private static UserManager userManager;
     private static User currentUser;
 
     public static void main(String[] args) {
-        List<MiniGame> gameList = new ArrayList<>(); //ArrayList to manage games 
-        gameList.add(new ChamChamCham());       
-        gameList.add(new RockPaperScissors());  
-        gameList.add(new NumberBaseball());     
-        gameList.add(new UpDown());   
+        List<MiniGame> gameList = new ArrayList<>(); // ArrayList to manage games
+        gameList.add(new ChamChamCham());
+        gameList.add(new RockPaperScissors());
+        gameList.add(new NumberBaseball());
+        gameList.add(new UpDown());
         // Later, if new game is added, just add it in here
 
         scanner = new Scanner(System.in); // For GameLaungherTest.java's test
@@ -45,7 +44,7 @@ public class GameLauncher {
                 case "2":
                     register();
                     break;
-                case "0": 
+                case "0":
                     System.out.println("Exiting application. Goodbye!");
                     return; // ends program
                 default:
@@ -72,59 +71,45 @@ public class GameLauncher {
             String menuInput = scanner.nextLine().trim();
             MiniGame selectedGame = null;
 
-          // 3. Main Menu Loop
+            // 3. Main Menu Loop
             if (menuInput.equals("0")) {
                 System.out.println("Exiting application. Goodbye!");
                 isRunning = false;
-                continue; 
+                continue;
             }
 
             try {
-              // Parse input string to integer
-              int gameIndex = Integer.parseInt(menuInput) - 1; // Adjust for 0-based index
+                // Parse input string to integer
+                int gameIndex = Integer.parseInt(menuInput) - 1; // Adjust for 0-based index
 
-             // Check for valid range (0 to list size - 1)
-             if (gameIndex >= 0 && gameIndex < gameList.size()) {
-                  selectedGame = gameList.get(gameIndex);
-              } else {
-                  System.out.println("Invalid selection. Please select a valid number.");
-                  continue;
-              }
+                // Check for valid range (0 to list size - 1)
+                if (gameIndex >= 0 && gameIndex < gameList.size()) {
+                    selectedGame = gameList.get(gameIndex);
+                } else {
+                    System.out.println("Invalid selection. Please select a valid number.");
+                    continue;
+                }
             } catch (NumberFormatException e) {
-             System.out.println("Invalid input. Please enter a number.");
-             continue;
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
             }
 
             // 4. Game Execution & Scoring
             if (selectedGame != null) {
                 // Run the game
                 int newScore = selectedGame.startGame(currentUser, scanner);
-                
-                // Get the game name (e.g., "RPS", "ChamChamCham")
-                String gameName = selectedGame.getGameName();
 
-                // Logic: Compare with best score and update if necessary
-                // (Assumes higher score is better. If 'lower is better', logic needs inversion)
-                int currentBestScore = currentUser.getScore(gameName);
-
-                
-                if (newScore > currentBestScore) {
-                     // Assuming User has a method to update the score map
-                     currentUser.getScoreMap().put(gameName, newScore); 
-                     System.out.println("New High Score! Updated in database.");
-                } else {
-                     System.out.println("Good game! (Best Score: " + currentBestScore + ")");
-                }
-
-                // Save to CSV immediately
-                userManager.saveUsers();
+                // [Refactor] 점수 갱신 로직을 별도 메서드로 분리 (캡슐화)
+                handleScoreUpdate(selectedGame, newScore);
 
                 // 5. Ranking Display
-                // Request UserManager to display the leaderboard
-                userManager.showTop5(gameName); 
+                userManager.showTop5(selectedGame.getGameName());
             }
+
         }
     }
+
+    
 
     // --- Helper Methods ---
 
@@ -154,11 +139,11 @@ public class GameLauncher {
             System.out.println("Invalid NickName Example 2: so yeon (x)");
             System.out.print("Enter New Nickname OR enter 'q' to cancel: ");
             String nickname = scanner.nextLine().trim();
-            
+
             // Check for cancellation command
             if (nickname.equalsIgnoreCase("q")) {
                 System.out.println("Registration cancelled. Returning to main menu.");
-                return; 
+                return;
             }
 
             // Validation 1: Empty Check
@@ -184,6 +169,40 @@ public class GameLauncher {
             currentUser = userManager.getUser(nickname);
             System.out.println("Registration successful! You are now logged in.");
             break;
+        }
+    }
+
+    /**
+     * Handles the logic for comparing and updating the user's high score.
+     * Supports both "Higher is Better" and "Lower is Better" games.
+     */
+    private static void handleScoreUpdate(MiniGame game, int newScore) {
+        String gameName = game.getGameName();
+        int currentBestScore = currentUser.getScore(gameName);
+        boolean isNewRecord = false;
+
+        // 1. Check scoring type (Higher is better vs Lower is better)
+        if (game.isLowerScoreBetter()) {
+            // For games like UpDown: Lower score (fewer tries) is better.
+            // If currentBestScore is 0, it means it's the first play (0 usually indicates
+            // no record).
+            if (currentBestScore == 0 || newScore < currentBestScore) {
+                isNewRecord = true;
+            }
+        } else {
+            // For games like RPS, Baseball: Higher score is better.
+            if (newScore > currentBestScore) {
+                isNewRecord = true;
+            }
+        }
+
+        // 2. Update and Save if it's a new record
+        if (isNewRecord) {
+            currentUser.getScoreMap().put(gameName, newScore); // Still accessing Map, but logic is isolated
+            userManager.saveUsers(); // Save changes to CSV
+            System.out.println("New High Score! (" + newScore + ") Updated in database.");
+        } else {
+            System.out.println("Good game! (Your Score: " + newScore + ", Best Record: " + currentBestScore + ")");
         }
     }
 }
