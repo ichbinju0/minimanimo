@@ -1,19 +1,28 @@
 package minimanimo;
 
 
-import minimanimo.game.*; 
+import minimanimo.game.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class GameLauncher {
-
    
-    private static Scanner scanner; // for GameLaungherTest,java's test
+    private static Scanner scanner; // For GameLaungherTest.java's test
     private static UserManager userManager;
     private static User currentUser;
 
     public static void main(String[] args) {
-        scanner = new Scanner(System.in); // for GameLaungherTest,java's test
-        currentUser = null; // for GameLaungherTest,java's test
+        List<MiniGame> gameList = new ArrayList<>(); //ArrayList to manage games 
+        gameList.add(new ChamChamCham());       
+        gameList.add(new RockPaperScissors());  
+        gameList.add(new NumberBaseball());     
+        gameList.add(new UpDown());   
+        // Later, if new game is added, just add it in here
+
+        scanner = new Scanner(System.in); // For GameLaungherTest.java's test
+        currentUser = null; // For GameLaungherTest.java's test
         // 1. Initialization
         userManager = new UserManager(); // Loads users.csv automatically
         System.out.println("========== MINIMANIMO GAME PLATFORM ==========");
@@ -36,47 +45,50 @@ public class GameLauncher {
                     register();
                     break;
                 default:
-                    System.out.println("⚠️ Invalid input. Please select 1 or 2.");
+                    System.out.println("Invalid input. Please select 1 or 2.");
             }
         }
 
         // 3. Main Menu Loop
         boolean isRunning = true;
         while (isRunning) {
-            System.out.println("\n========================================");
+            // [2] Automatic Menu Display
+            System.out.println("========================================");
             System.out.println("  Welcome, " + currentUser.getNickname() + "!");
             System.out.println("  Please select a game to play:");
             System.out.println("========================================");
-            System.out.println("1. Cham Cham Cham");
-            System.out.println("2. Rock Paper Scissors");
-            System.out.println("3. Number Baseball");
-            System.out.println("4. Up Down");
+
+            for (int i = 0; i < gameList.size(); i++) {
+                // Print starting from 1 (Index 0 becomes Menu 1)
+                System.out.println((i + 1) + ". " + gameList.get(i).getGameName());
+            }
             System.out.println("0. Exit");
             System.out.print("Select >> ");
 
             String menuInput = scanner.nextLine().trim();
             MiniGame selectedGame = null;
 
-            switch (menuInput) {
-                case "1":
-                    selectedGame = new ChamChamCham();
-                    break;
-                case "2":
-                    selectedGame = new RockPaperScissors();
-                    break;
-                case "3":
-                    selectedGame = new NumberBaseball();
-                    break;
-                case "4":
-                    selectedGame = new UpDown();
-                    break;
-                case "0":
-                    System.out.println("Exiting application. Goodbye!");
-                    isRunning = false;
-                    continue; // Break the loop
-                default:
-                    System.out.println("Invalid selection. Please try again.");
-                    continue;
+          // 3. Main Menu Loop
+            if (menuInput.equals("0")) {
+                System.out.println("Exiting application. Goodbye!");
+                isRunning = false;
+                continue; 
+            }
+
+            try {
+              // Parse input string to integer
+              int gameIndex = Integer.parseInt(menuInput) - 1; // Adjust for 0-based index
+
+             // Check for valid range (0 to list size - 1)
+             if (gameIndex >= 0 && gameIndex < gameList.size()) {
+                  selectedGame = gameList.get(gameIndex);
+              } else {
+                  System.out.println("Invalid selection. Please select a valid number.");
+                  continue;
+              }
+            } catch (NumberFormatException e) {
+             System.out.println("Invalid input. Please enter a number.");
+             continue;
             }
 
             // 4. Game Execution & Scoring
@@ -91,8 +103,7 @@ public class GameLauncher {
                 // (Assumes higher score is better. If 'lower is better', logic needs inversion)
                 int currentBestScore = currentUser.getScore(gameName);
 
-                // Note: You can delegate this logic to User.updateScore if implemented there.
-                // Here, we explicitly check to satisfy the Requirement "Compare with user's best score".
+                
                 if (newScore > currentBestScore) {
                      // Assuming User has a method to update the score map
                      currentUser.getScoreMap().put(gameName, newScore); 
@@ -128,7 +139,16 @@ public class GameLauncher {
 
     private static void register() {
         while (true) {
-            System.out.print("Enter New Nickname (Letters/Numbers only): ");
+            System.out.println("----------------------------------------------------");
+            System.out.println("No spaces or special characters are allowed");
+            System.out.println("Nick name should be letters or with numbers only");
+            System.out.println("----------------------------------------------------");
+            System.out.println("Valid NickName Example 1: soyeon (o)");
+            System.out.println("Valid NickName Example2 : soyeon33 (o)");
+            System.out.println("Valid NickName Example3 : 33 (o)");
+            System.out.println("Invalid NickName Example 1: soyeon! (x)");
+            System.out.println("Invalid NickName Example 2: so yeon (x)");
+            System.out.print("Enter New Nickname: ");
             String nickname = scanner.nextLine().trim();
 
             // Validation 1: Empty Check
