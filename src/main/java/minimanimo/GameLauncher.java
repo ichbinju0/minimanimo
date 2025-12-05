@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class GameLauncher {
 
-    private static Scanner scanner; // For GameLaungherTest.java's test
+    private static Scanner scanner; // For GameLauncherTest.java's test
     private static UserManager userManager;
     private static User currentUser;
 
@@ -20,8 +20,8 @@ public class GameLauncher {
         gameList.add(new UpDown());
         // Later, if new game is added, just add it in here
 
-        scanner = new Scanner(System.in); // For GameLaungherTest.java's test
-        currentUser = null; // For GameLaungherTest.java's test
+        scanner = new Scanner(System.in); // For GameLauncherTest.java's test
+        currentUser = null; // For GameLauncherTest.java's test
         // 1. Initialization
         userManager = new UserManager(); // Loads users.csv automatically
         System.out.println("========== MINIMANIMO GAME PLATFORM ==========");
@@ -172,10 +172,7 @@ public class GameLauncher {
         }
     }
 
-    /**
-     * Handles the logic for comparing and updating the user's high score.
-     * Supports both "Higher is Better" and "Lower is Better" games.
-     */
+    
     private static void handleScoreUpdate(MiniGame game, int newScore) {
         String gameName = game.getGameName();
         int currentBestScore = currentUser.getScore(gameName);
