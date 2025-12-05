@@ -13,6 +13,7 @@ public class GameLauncher {
 
     public static void main(String[] args) {
         scanner = new Scanner(System.in); // for GameLaungherTest,java's test
+        currentUser = null; // for GameLaungherTest,java's test
         // 1. Initialization
         userManager = new UserManager(); // Loads users.csv automatically
         System.out.println("========== MINIMANIMO GAME PLATFORM ==========");
