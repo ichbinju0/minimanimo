@@ -1,7 +1,7 @@
 package minimanimo;
 
 
-import minimanimo.game.*; // Assumes games are in a 'game' subpackage
+import minimanimo.game.*; 
 import java.util.Scanner;
 
 public class GameLauncher {
@@ -19,9 +19,10 @@ public class GameLauncher {
         // 2. Authentication Flow (Loop until logged in)
         while (currentUser == null) {
             System.out.println("\n[Authentication Menu]");
+            System.out.println("Enter 1 or 2: ");
             System.out.println("1. Login (Existing User)");
             System.out.println("2. Register (New User)");
-            System.out.print("Select >> ");
+            System.out.print(">> ");
 
             String choice = scanner.nextLine().trim();
 

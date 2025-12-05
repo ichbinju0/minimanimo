@@ -1,4 +1,4 @@
-package minimanimo;
+package minimanimo.game;
 
 import java.util.Scanner;
 
