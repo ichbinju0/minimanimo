@@ -1,6 +1,7 @@
 package minimanimo.game;
 
 import java.util.Scanner;
+import minimanimo.User;
 
 public interface MiniGame {
 
