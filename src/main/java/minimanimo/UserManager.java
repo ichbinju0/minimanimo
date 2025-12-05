@@ -109,7 +109,7 @@ public class UserManager {
         return users.size();
     }
 
-    public void showTop5(String gameName) {
+    public void showTop5(String gameName) { // Display top 5 users for a game
         if (users.isEmpty()) {
             System.out.println("[INFO] No users available.");
             return;
