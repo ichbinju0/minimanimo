@@ -34,6 +34,7 @@ public class GameLauncher {
             System.out.println("1. Login (Existing User)");
             System.out.println("2. Register (New User)");
             System.out.println("0. Exit");
+            // [UI Standardize] Consistent prompt style
             System.out.print(">> ");
 
             String choice = scanner.nextLine().trim();
@@ -55,7 +56,10 @@ public class GameLauncher {
 
         // 3. Main Menu Loop
         boolean isRunning = true;
-        System.out.println("  Welcome, " + currentUser.getNickname() + "!");
+        
+        // Display welcome message only once when entering the main menu loop
+        System.out.println("\nWelcome, " + currentUser.getNickname() + "!");
+
         while (isRunning) {
             // [2] Automatic Menu Display
             System.out.println("========================================");
@@ -68,7 +72,8 @@ public class GameLauncher {
                 System.out.println((i + 1) + ". " + gameList.get(i).getGameName());
             }
             System.out.println("0. Exit");
-            System.out.print("Select >> ");
+            // [UI Standardize] Removed "Select" to keep it consistent with ">>"
+            System.out.print(">> ");
 
             String menuInput = scanner.nextLine().trim();
             MiniGame selectedGame = null;
@@ -143,7 +148,8 @@ public class GameLauncher {
     // --- Helper Methods ---
 
     private static void login() {
-        System.out.print("Enter Nickname: ");
+        // [UI Standardize] Using ">>" instead of ":"
+        System.out.print("Enter Nickname >> ");
         String nickname = scanner.nextLine().trim();
 
         User user = userManager.getUser(nickname);
@@ -166,7 +172,9 @@ public class GameLauncher {
             System.out.println("Valid NickName Example 3: 33 (o)");
             System.out.println("Invalid NickName Example 1: soyeon! (x)");
             System.out.println("Invalid NickName Example 2: so yeon (x)");
-            System.out.print("Enter New Nickname OR enter 'q' to cancel: ");
+            
+            // [UI Standardize] using ">>" and clearer prompt
+            System.out.print("Enter New Nickname (or 'q' to cancel) >> ");
             String nickname = scanner.nextLine().trim();
 
             // Check for cancellation command
