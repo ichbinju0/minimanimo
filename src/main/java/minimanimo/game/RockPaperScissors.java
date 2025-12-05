@@ -1,6 +1,5 @@
 package minimanimo.game;
 
-import minimanimo.MiniGame;
 import minimanimo.User;
 import java.util.Random;
 import java.util.Scanner;
@@ -36,15 +35,22 @@ public class RockPaperScissors implements MiniGame {
             
             // Check for non-numeric input and range 1-3
             try {
-                String input = scanner.next(); 
+                // This prevents "Invalid input" errors in the main menu after the game ends.
+                String input = scanner.nextLine().trim(); 
+                
+                // Handle empty input (just Enter)
+                if (input.isEmpty()) {
+                    continue;
+                }
+
                 userChoice = Integer.parseInt(input);
 
                 if (userChoice < 1 || userChoice > 3) {
-                    System.out.println("⚠️ Invalid input. Please choose 1, 2, or 3.");
+                    System.out.println("Invalid input. Please choose 1, 2, or 3.");
                     continue;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("⚠️ Please enter a number!");
+                System.out.println("Please enter a number!");
                 continue;
             }
 
@@ -55,22 +61,17 @@ public class RockPaperScissors implements MiniGame {
 
             // [Game Logic] Determine Winner
             if (userChoice == computerChoice) {
-                System.out.println("😐 It's a draw! (Replay round)");
+                System.out.println("It's a draw! (Replay round)");
             } else if (isWin(userChoice, computerChoice)) {
-                System.out.println("🎉 You won! (+1 point)");
+                System.out.println("You won! (+1 point)");
                 currentScore++;
             } else {
-                System.out.println("😭 You lost... Game Over!");
+                System.out.println("You lost... Game Over!");
                 break;
             }
         }
 
         System.out.println("=== Game Over! Final Score: " + currentScore + " ===");
-        
-        // [Integration] Update user's high score if applicable
-        if (user != null) {
-            user.updateScore(getGameName(), currentScore);
-        }
 
         return currentScore;
     }
@@ -93,9 +94,9 @@ public class RockPaperScissors implements MiniGame {
 
     private String choiceToString(int choice) {
         switch (choice) {
-            case 1: return "👊 Rock";
-            case 2: return "🖐 Paper";
-            case 3: return "✌️ Scissors";
+            case 1: return "Rock";
+            case 2: return "Paper";
+            case 3: return "Scissors";
             default: return "Unknown";
         }
     }

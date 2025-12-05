@@ -7,6 +7,7 @@ public class User {
     private String nickname;
     private Map<String, Integer> scoreMap; 
 
+    // Construct a new User with the given nickname
     public User(String nickname) {
         if (nickname == null || nickname.trim().isEmpty()) {
             throw new IllegalArgumentException("Nickname cannot be null or empty");
@@ -23,6 +24,7 @@ public class User {
         return scoreMap;
     }
 
+    // Update the score for a specific game
     public void updateScore(String gameName, int score) {
         if (gameName == null) {
             throw new IllegalArgumentException("Game name cannot be null");
@@ -32,7 +34,7 @@ public class User {
         }
     }
 
-
+    // Get the score for a specific game
     public int getScore(String gameName) {
         if (gameName == null) {
             throw new IllegalArgumentException("Game name cannot be null");
