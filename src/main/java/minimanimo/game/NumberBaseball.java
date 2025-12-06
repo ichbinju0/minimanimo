@@ -54,7 +54,7 @@ public class NumberBaseball implements MiniGame {
             String input = scanner.nextLine(); 
 
             if ("0".equals(input)) {
-                System.out.println("🛑 Game stopped by user.");
+                System.out.println("Game stopped by user.");
                 return 0; // Return 0 on user quit
             }
 
