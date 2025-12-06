@@ -8,6 +8,14 @@ public class RockPaperScissors implements MiniGame {
 
     private final Random random = new Random();
 
+    // Define constants for readability and maintainability
+    private static final int ROCK = 1;
+    private static final int PAPER = 2;
+    private static final int SCISSORS = 3;
+
+    private static final int WIN_SCORE = 3;
+    private static final int DRAW_SCORE = 1;
+
     @Override
     public String getGameName() {
         return "RPS";
@@ -21,14 +29,15 @@ public class RockPaperScissors implements MiniGame {
     @Override
     public int startGame(User user, Scanner scanner) {
         System.out.println("=== Starting Rock Paper Scissors (RPS)! ===");
-        System.out.println("Rules: Win (+3 points), Draw Win (+1 point), Lose (Game Over)!");
+        System.out.printf("Rules: Win (+%d points), Draw (+%d point), Lose (Game Over)!\n", WIN_SCORE, DRAW_SCORE);
 
         int currentScore = 0;
         
         while (true) {
             System.out.println("\n------------------------------");
             System.out.println("Current Score: " + currentScore);
-            System.out.println("What is your move?");
+            
+            System.out.println("Enter your choice:");
             System.out.print("1. Rock  2. Paper  3. Scissors (0. Quit RPS) : ");
 
             int userChoice;
@@ -42,7 +51,6 @@ public class RockPaperScissors implements MiniGame {
                 if (input.equals("0")) {
                     System.out.println("\n Game stopped by user.");
                     System.out.println("=== Game Over! Final Score: " + currentScore + " ===");
-    
                     return currentScore; 
                 }
 
@@ -54,7 +62,7 @@ public class RockPaperScissors implements MiniGame {
 
                 userChoice = Integer.parseInt(input);
 
-                if (userChoice < 1 || userChoice > 3) {
+                if (userChoice < ROCK || userChoice > SCISSORS) {
                     System.out.println("Invalid input. Please choose 1, 2, or 3.");
                     continue;
                 }
@@ -70,11 +78,11 @@ public class RockPaperScissors implements MiniGame {
 
             // [Game Logic] Determine Winner
             if (userChoice == computerChoice) {
-                System.out.println("It's a draw! (+1 point)");
-                currentScore++; //Draw: +1 point
+                System.out.printf("It's a draw! (+%d point)\n", DRAW_SCORE);
+                currentScore += DRAW_SCORE; // Draw: +1 point
             } else if (isWin(userChoice, computerChoice)) {
-                System.out.println("You won! (+3 point)");
-                currentScore +=3; //Win: +3 points
+                System.out.printf("You won! (+%d points)\n", WIN_SCORE);
+                currentScore += WIN_SCORE; // Win: +3 points
             } else {
                 System.out.println("You lost... Game Over!");
                 break;
@@ -92,9 +100,9 @@ public class RockPaperScissors implements MiniGame {
         // Rock(1) vs Scissors(3) -> Win
         // Paper(2) vs Rock(1)    -> Win
         // Scissors(3) vs Paper(2)-> Win
-        return (user == 1 && computer == 3) ||
-               (user == 2 && computer == 1) ||
-               (user == 3 && computer == 2);
+        return (user == ROCK && computer == SCISSORS) ||
+               (user == PAPER && computer == ROCK) ||
+               (user == SCISSORS && computer == PAPER);
     }
 
     // Helper method to display choices
@@ -106,9 +114,9 @@ public class RockPaperScissors implements MiniGame {
 
     private String choiceToString(int choice) {
         switch (choice) {
-            case 1: return "Rock";
-            case 2: return "Paper";
-            case 3: return "Scissors";
+            case ROCK: return "Rock";
+            case PAPER: return "Paper";
+            case SCISSORS: return "Scissors";
             default: return "Unknown";
         }
     }
