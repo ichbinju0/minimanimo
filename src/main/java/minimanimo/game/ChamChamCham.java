@@ -68,13 +68,13 @@ public class ChamChamCham implements MiniGame {
 
             // Determine win/loss
             if (input.equals(computerDir)) {
-                System.out.println(" NO MATCH... You lost.");
+                System.out.println(" MATCH... You lost.");
                 System.out.println("Game Over! Your Final Score: " + score);
                 break;
             } else {
-                System.out.println(" MATCH! You won this round!");
+                System.out.println(" No MATCH! You won this round!");
                 score++;
-                System.out.println("Current Winsteak: " + score);
+                System.out.println("Current Winstreak: " + score);
             }
         }
         
