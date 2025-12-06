@@ -111,7 +111,7 @@ The game ends either upon a loss (ChamChamCham, Rock-Paper-Scissors) or upon suc
 | No. | Game Name | Ranking Criteria (Goal) |
 |-----|-----------|-------------------------|
 | 1 | Cham Cham Cham | Number of successful rounds (consecutive) |
-| 2 | Rock Paper Scissors | Win streak count | 
+| 2 | Rock Paper Scissors | Total Score (Win +3, Draw +1) |
 | 3 | Number Baseball | Remaining attempts (10 – attempts used) | 
 | 4 | Number UpDown | Remaining attempts (10 – attempts used) | 
 
