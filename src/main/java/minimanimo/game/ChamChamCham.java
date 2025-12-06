@@ -23,7 +23,7 @@ public class ChamChamCham implements MiniGame {
         System.out.println("       Welcome to Cham-Cham-Cham!         ");
         System.out.println("==========================================");
         System.out.println("Rule: If you look in the SAME direction as the computer, you WIN!");
-        System.out.println("Tip: You can press 'Q' at any time to quit and save your score.");
+        System.out.println("Tip: You can press '0' at any time to quit and save your score.");
 
         int score = 0;
         Random random = new Random();
@@ -32,18 +32,18 @@ public class ChamChamCham implements MiniGame {
         while (true) {
             System.out.println("\n------------------------------------------");
             // Quit option added
-            System.out.print("Select Direction (L: Left / C: Center / R: Right) or 'Q' to Quit: ");
+            System.out.print("Select Direction (L: Left / C: Center / R: Right) or '0' to Quit: ");
             
             String input = scanner.nextLine().trim().toUpperCase();
 
             // Handle empty inputS
             if (input.isEmpty()) {
-                System.out.println("You only typed enter. Please choose L, C, R, or Q.");
+                System.out.println("You only typed enter. Please choose L, C, R, or 0.");
                 continue; 
             }
 
             // Quit condition
-            if (input.equals("Q")) {
+            if (input.equals("0")) {
                 System.out.println(" Game Stopped by User.");
                 System.out.println("Final Score: " + score);
                 break; // game ends here
@@ -51,7 +51,7 @@ public class ChamChamCham implements MiniGame {
 
             // Input validation
             if (!input.equals("L") && !input.equals("C") && !input.equals("R")) {
-                System.out.println("[ERROR] Invalid input! Please enter L, C, R, or Q.");
+                System.out.println("[ERROR] Invalid input! Please enter L, C, R, or 0.");
                 continue;
             }
 
