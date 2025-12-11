@@ -94,6 +94,100 @@ java -jar target/minimanimo-1.0-SNAPSHOT.jar
 
 ---
 
+## 🎮 How to Play
+
+Minimanimo is a console-based collection of arcade mini-games. Follow the instructions below to start playing.
+
+### 1️. Start & Login
+When you run the program (`GameLauncher`), the authentication menu will appear.
+* **New User?** Select `2` to **Register**.
+  * *Rule:* Nicknames must contain **letters and numbers only** (no spaces or special characters).
+* **Returning User?** Select `1` to **Login** with your registered nickname.
+
+```text
+[Authentication Menu]
+───────────────────────────
+1. Login (Existing User)
+2. Register (New User)
+───────────────────────────
+0. Exit
+>> 2
+Enter New Nickname (or 'q' to cancel) >> user1
+Registration successful! You are now logged in.
+```
+
+### 2️. Main Menu
+After logging in, choose a game from the list by entering its number.
+
+```text
+★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★
+  Please select a game to play:
+★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★
+1. ChamChamCham
+2. RPS (Rock Paper Scissors)
+3. Baseball (Number Baseball)
+4. UpDown
+0. Exit
+>> 3
+```
+
+### 3️. Game Rules
+
+#### 👆 1. ChamChamCham
+A game of reflexes where you try to look in a different direction than the computer.
+* **Input:** Enter `L` (Left), `C` (Center), or `R` (Right).
+* **Win:** If you look in a **different** direction than the computer, you gain **+1 point**.
+* **Lose:** If you look in the **same** direction, the game ends.
+* **Quit:** Enter `0` to stop.
+
+#### ✊ 2. RPS (Rock Paper Scissors Survival)
+A survival mode game where you accumulate points until you lose.
+* **Input:** `1` (Rock), `2` (Paper), `3` (Scissors).
+* **Scoring:** Win (**+3 points**), Draw (**+1 point**), Lose (**Game Over**).
+
+#### ⚾ 3. Number Baseball
+A logic puzzle to guess a secret 3-digit number.
+* **Goal:** Guess 3 unique digits (1-9) (e.g., `123`).
+* **Hints:**
+  * **Strike:** Correct digit in the correct position.
+  * **Ball:** Correct digit but in the wrong position.
+  * **Out:** No matching digits.
+* **Life:** You have **10 attempts**.
+
+#### ⬆️ 4. UpDown
+Guess a random number between 1 and 100.
+* **Goal:** Find the secret number within **10 attempts**.
+* **Hints:** The game will tell you if the target number is **Higher (Up)** or **Lower (Down)** than your guess.
+
+### 4️. Results & Ranking
+After a game ends, your score is displayed along with the **Top 5 Ranking** for that game.
+* New high scores are automatically saved to the database.
+
+```text
+Good game! (Your Score: 8, Best Record: 5)
+★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★
+[INFO]  Top 5 users for Baseball:
+★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★
+  Rank  |      Nickname      |  Score 
+--------------------------------------
+   1    |  master            |      9 
+   2    |  user1             |      8 
+...
+```
+
+### 5️. Next Steps
+After checking the ranking, choose your next action:
+* `1. Play Again`: Restart the current game immediately.
+* `2. Main Menu`: Return to the menu to choose a different game.
+* `0. Exit Program`: Close Minimanimo.
+
+---
+
+### Tips
+* **Quit Anytime:** Enter `0` during any game to quit or return to the previous menu.
+* **Data Persistence:** All user profiles and high scores are saved in `users.csv`, so your records remain even after restarting the program.
+
+---
 
 ## 3. Architecture & Data Structure
 
