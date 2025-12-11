@@ -27,13 +27,7 @@ public class GameLauncher {
         // 1. Initialization
         userManager = new UserManager(); // Loads users.csv automatically
         
-        //System.out.println("  __  __ _____ _   _ _____ __  __          _   _ _____ __  __  ____  ");
-        //System.out.println(" |  \\/  |_   _| \\ | |_   _|  \\/  |   /\\   | \\ | |_   _|  \\/  |/ __ \\ ");
-        //System.out.println(" | |\\/| |   | |   | .` |     | |  | |\\/| |  | - |   | .` |     | |  | |\\/| | | (_) | ");
-        //System.out.println(" | |  | |_| |_| |\\  |_| |_| |  | |/ ____ \\| |\\  |_| |_| |  | | |__| |");
-        //System.out.println(" |_|  |_|_____|_| \\_|_____|_|  |_/_/    \\_\\_| \\_|_____|_|  |_|\\____/ ");
-        //System.out.println("                                                       ");
-        //System.out.println("                                                       ");
+        
         System.out.println("""
                  __  __ _____ _   _ _____ __  __          _   _ _____ __  __  ____  
                 |  \\/  |_   _| \\ | |_   _|  \\/  |   /\\   | \\ | |_   _|  \\/  |/ __ \\ 
