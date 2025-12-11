@@ -26,13 +26,21 @@ public class GameLauncher {
 
         // 1. Initialization
         userManager = new UserManager(); // Loads users.csv automatically
-        System.out.println("========== MINIMANIMO GAME PLATFORM ==========");
+        System.out.println("▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖ ▗▄▖ ");
+        System.out.println("▐▛▚▞▜▌  █  ▐▛▚▖▐▌  █  ▐▛▚▞▜▌▐▌ ▐▌▐▛▚▖▐▌  █  ▐▛▚▞▜▌▐▌ ▐▌");
+        System.out.println("▐▌  ▐▌  █  ▐▌ ▝▜▌  █  ▐▌  ▐▌▐▛▀▜▌▐▌ ▝▜▌  █  ▐▌  ▐▌▐▌ ▐▌");
+        System.out.println("▐▌  ▐▌▗▄█▄▖▐▌  ▐▌▗▄█▄▖▐▌  ▐▌▐▌ ▐▌▐▌  ▐▌▗▄█▄▖▐▌  ▐▌▝▚▄▞▘");
+        System.out.println("                                                       ");
+        System.out.println("                                                       ");
+        System.out.println("                                                       ");
 
         // 2. Authentication Flow (Loop until logged in)
         while (currentUser == null) {
             System.out.println("\n[Authentication Menu]");
+            System.out.println("───────────────────────────");
             System.out.println("1. Login (Existing User)");
             System.out.println("2. Register (New User)");
+            System.out.println("───────────────────────────");
             System.out.println("0. Exit");
             // [UI Standardize] Consistent prompt style
             System.out.print(">> ");
@@ -47,10 +55,10 @@ public class GameLauncher {
                     register();
                     break;
                 case "0":
-                    System.out.println("Exiting application. Goodbye!");
+                    System.out.println("Thanks for playing MINIMANIMO! See you again");
                     return; // Terminates the program
                 default:
-                    System.out.println("Invalid input. Please select 1, 2 or 0.");
+                    System.out.println("\u001B[31mInvalid input. Please select 1, 2 or 0.\u001B[0m");
             }
         }
 
@@ -62,9 +70,9 @@ public class GameLauncher {
 
         while (isRunning) {
             // [2] Automatic Menu Display
-            System.out.println("========================================");
+            System.out.println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★");
             System.out.println("  Please select a game to play:");
-            System.out.println("========================================");
+            System.out.println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★");
 
             // Dynamically print the game list
             for (int i = 0; i < gameList.size(); i++) {
@@ -98,7 +106,7 @@ public class GameLauncher {
                     continue;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println("\u001B[31mInvalid input. Please enter a number.\u001B[0m");
                 continue;
             }
 
@@ -107,6 +115,8 @@ public class GameLauncher {
 
                 // [Logic] Inner Loop: Keeps the user in the same game until they choose to leave
                 while (true) {
+		            clearScreen();  
+					typeWriter("===== Starting " + selectedGame.getGameName() + " =====", 30);
                     // Run the game
                     int newScore = selectedGame.startGame(currentUser, scanner);
 
@@ -117,10 +127,12 @@ public class GameLauncher {
                     userManager.showTop5(selectedGame.getGameName());
 
                     // [UX Improvement] Next Step Selection
-                    System.out.println("\n----------------------------------------");
+                    System.out.println("\n★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★");
                     System.out.println("What would you like to do next?");
+                    System.out.println("───────────────────────────────");
                     System.out.println("1. Play Again (Same Game)");
                     System.out.println("2. Main Menu (Select Other Game)");
+                    System.out.println("───────────────────────────────");
                     System.out.println("0. Exit Program");
                     System.out.print(">> ");
 
@@ -130,6 +142,7 @@ public class GameLauncher {
                         System.out.println("\nStarting " + selectedGame.getGameName() + " again...");
                         continue; // Restart the inner loop (Game restarts)
                     } else if (nextChoice.equals("2")) {
+		                    clearScreen();
                         System.out.println("Returning to Main Menu...");
                         break; // Break inner loop -> Go back to Main Menu loop
                     } else if (nextChoice.equals("0")) {
@@ -137,7 +150,7 @@ public class GameLauncher {
                         isRunning = false; // Stop the outer loop
                         break; // Break inner loop
                     } else {
-                        System.out.println("Invalid input. Returning to Main Menu.");
+                        System.out.println("\u001B[31mInvalid input. Returning to Main Menu.\u001B[0m");
                         break;
                     }
                 }
@@ -155,7 +168,7 @@ public class GameLauncher {
         User user = userManager.getUser(nickname);
         if (user != null) {
             currentUser = user;
-            System.out.println("Login Successful!");
+            typeWriter("Login Successful!",20);
         } else {
             System.out.println("User not found. Please register first.");
         }
@@ -163,10 +176,10 @@ public class GameLauncher {
 
     private static void register() {
         while (true) {
-            System.out.println("----------------------------------------------------");
+            System.out.println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★");
             System.out.println("No spaces or special characters are allowed.");
             System.out.println("Nickname should be letters or numbers only.");
-            System.out.println("----------------------------------------------------");
+            System.out.println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★");
             System.out.println("Valid NickName Example 1: soyeon (o)");
             System.out.println("Valid NickName Example 2: soyeon33 (o)");
             System.out.println("Valid NickName Example 3: 33 (o)");
@@ -236,9 +249,26 @@ public class GameLauncher {
         if (isNewRecord) {
             currentUser.getScoreMap().put(gameName, newScore);
             userManager.saveUsers(); // Save changes to CSV
-            System.out.println("New High Score! (" + newScore + ") Updated in database.");
+            typeWriter("\u001B[32mNew High Score! (" + newScore + ") Updated in database.\u001B[0m",35);
         } else {
             System.out.println("Good game! (Your Score: " + newScore + ", Best Record: " + currentBestScore + ")");
         }
+    }
+    
+    private static void clearScreen() {
+			  for (int i = 0; i < 50; i++) System.out.println();
+		}
+
+    // Typing Effect Helper Method
+    public static void typeWriter(String text, int delay) {
+        for (char c : text.toCharArray()) {
+            System.out.print(c);
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        System.out.println();
     }
 }

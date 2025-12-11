@@ -26,7 +26,7 @@ public class UserManager {
         File file = new File(csvFile);
 
         if (!file.exists()) { // If file doesn't exist, initialize empty list
-            System.out.println("[INFO] Data file not found. Initializing with empty list.");
+            System.out.println("\u001B[33m[INFO]\u001B[0m Data file not found. Initializing with empty list.");
             return;
         }
 
@@ -57,11 +57,11 @@ public class UserManager {
                     users.add(user);
 
                 } catch (NumberFormatException e) {
-                    System.out.println("[WARN] Skipping invalid data format: " + line);
+                    System.out.println("\u001B[33m[WARN]\u001B[0m  Skipping invalid data format: " + line);
                 }
             }
         } catch (IOException e) {
-            System.out.println("[ERROR] Failed to load users: " + e.getMessage());
+            System.out.println("\u001B[31m[ERROR]\u001B[0m  Failed to load users: " + e.getMessage());
         }
     }
 
@@ -79,17 +79,17 @@ public class UserManager {
                 bw.newLine();
             }
         } catch (IOException e) {
-            System.out.println("[ERROR] Failed to save users: " + e.getMessage());
+            System.out.println("\u001B[31m[ERROR]\u001B[0m  Failed to save users: " + e.getMessage());
         }
     }
 
     public void addUser(String nickname) { // Add new user
         if (nickname == null || nickname.trim().isEmpty()) {
-            System.out.println("[ERROR] Nickname cannot be empty.");
+            System.out.println("\u001B[31m[ERROR]\u001B[0m  Nickname cannot be empty.");
             return;
         }
         if (getUser(nickname) != null) {
-            System.out.println("[ERROR] Nickname already exists: " + nickname);
+            System.out.println("\u001B[31m[ERROR]\u001B[0m  Nickname already exists:  " + nickname);
             return;
         }
         users.add(new User(nickname));
@@ -111,7 +111,7 @@ public class UserManager {
 
     public void showTop5(String gameName) { // Display top 5 users for a game
         if (users.isEmpty()) {
-            System.out.println("[INFO] No users available.");
+            System.out.println("\u001B[34m[INFO]\u001B[0m  No users available.");
             return;
         }
         List<User> sortedUsers = new ArrayList<>(this.users);
@@ -120,9 +120,9 @@ public class UserManager {
             int score2 = u2.getScore(gameName);
             return score2 - score1;
         });
-
-        System.out.println("[INFO] Top 5 users for " + gameName + ":");
-        System.out.println("--------------------------------------");
+        System.out.println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★");
+        System.out.println("\u001B[34m[INFO]\u001B[0m  Top 5 users for " + gameName + ":");
+        System.out.println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★");
 
         System.out.println("  Rank  |     Nickname     |  Score ");
         System.out.println("--------------------------------------");
@@ -133,6 +133,6 @@ public class UserManager {
             System.out.printf("   %2d   |  %-14s  |  %5d \n",
                     (i + 1), u.getNickname(), u.getScore(gameName));
         }
-        System.out.println("--------------------------------------");
+        System.out.println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★");
     }
 }
