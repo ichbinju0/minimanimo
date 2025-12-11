@@ -79,9 +79,9 @@ public class ChamChamCham implements MiniGame {
             // Determine win/loss
             if (input.equals(computerDir)) {
                 System.out.println("(>_<) HIT! You looked the same way...");
-                System.out.println("==========================================");
+                System.out.println("===========================================");
                 System.out.println("   [X] GAME OVER! Final Score: " + score);
-                System.out.println("==========================================");
+                System.out.println("===========================================");
                 break;
             } else {
                 System.out.println("(^_^) DODGE SUCCESS! (+1 Point)");
