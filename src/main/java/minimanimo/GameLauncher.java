@@ -14,15 +14,16 @@ public class GameLauncher {
 
     public static void main(String[] args) {
         // [1] Game List Management
-        // Using a List makes it easy to add new games later without modifying the menu logic.
+        // Using a List makes it easy to add new games later without modifying the menu
+        // logic.
         List<MiniGame> gameList = new ArrayList<>();
-        gameList.add(new ChamChamCham());       // 1. ChamChamCham
-        gameList.add(new RockPaperScissors());  // 2. RockPaperScissors
-        gameList.add(new NumberBaseball());     // 3. NumberBaseball
-        gameList.add(new UpDown());             // 4. UpDown
+        gameList.add(new ChamChamCham()); // 1. ChamChamCham
+        gameList.add(new RockPaperScissors()); // 2. RockPaperScissors
+        gameList.add(new NumberBaseball()); // 3. NumberBaseball
+        gameList.add(new UpDown()); // 4. UpDown
 
         scanner = new Scanner(System.in); // Initialized here for GameLauncherTest.java
-        currentUser = null;               // Reset user for GameLauncherTest.java
+        currentUser = null; // Reset user for GameLauncherTest.java
 
         // 1. Initialization
         userManager = new UserManager(); // Loads users.csv automatically
@@ -64,7 +65,7 @@ public class GameLauncher {
 
         // 3. Main Menu Loop
         boolean isRunning = true;
-        
+
         // Display welcome message only once when entering the main menu loop
         System.out.println("\nWelcome, " + currentUser.getNickname() + "!");
 
@@ -113,7 +114,8 @@ public class GameLauncher {
             // 4. Game Execution & Scoring
             if (selectedGame != null) {
 
-                // [Logic] Inner Loop: Keeps the user in the same game until they choose to leave
+                // [Logic] Inner Loop: Keeps the user in the same game until they choose to
+                // leave
                 while (true) {
 		            clearScreen();  
 					typeWriter("===== Starting " + selectedGame.getGameName() + " =====", 30);
@@ -185,7 +187,7 @@ public class GameLauncher {
             System.out.println("Valid NickName Example 3: 33 (o)");
             System.out.println("Invalid NickName Example 1: soyeon! (x)");
             System.out.println("Invalid NickName Example 2: so yeon (x)");
-            
+
             // [UI Standardize] using ">>" and clearer prompt
             System.out.print("Enter New Nickname (or 'q' to cancel) >> ");
             String nickname = scanner.nextLine().trim();
@@ -234,7 +236,8 @@ public class GameLauncher {
         // 1. Check scoring type (Higher is better vs Lower is better)
         if (game.isLowerScoreBetter()) {
             // For games like UpDown: Lower score (fewer tries) is better.
-            // If currentBestScore is 0, it means it's the first play (0 usually indicates no record).
+            // If currentBestScore is 0, it means it's the first play (0 usually indicates
+            // no record).
             if (currentBestScore == 0 || newScore < currentBestScore) {
                 isNewRecord = true;
             }

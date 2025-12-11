@@ -11,7 +11,6 @@ public class ChamChamCham implements MiniGame {
         return "ChamChamCham";
     }
 
-
     @Override
     public boolean isLowerScoreBetter() {
         return false;
@@ -19,33 +18,36 @@ public class ChamChamCham implements MiniGame {
 
     @Override
     public int startGame(User user, Scanner scanner) {
-        System.out.println("==========================================");
-        System.out.println("       Welcome to Cham-Cham-Cham!         ");
-        System.out.println("==========================================");
-        System.out.println("Rule: If you look in the DIFFERENT direction from the computer, you WIN!");
-        System.out.println("Tip: You can press '0' at any time to quit and save your score.");
+        System.out.println("\n\n");
+        System.out.println("##########################################");
+        System.out.println("##                                      ##");
+        System.out.println("##          CHAM - CHAM - CHAM          ##");
+        System.out.println("##                                      ##");
+        System.out.println("##########################################");
+        System.out.println("\n[RULE] Look in a DIFFERENT direction to WIN!");
+        System.out.println("[TIP]  Enter '0' to save & quit.\n");
 
         int score = 0;
         Random random = new Random();
-        String[] directions = {"L", "C", "R"};
+        String[] directions = { "L", "C", "R" };
 
         while (true) {
-            System.out.println("\n------------------------------------------");
-            // Quit option added
-            System.out.print("Select Direction (L: Left / C: Center / R: Right) or '0' to Quit: ");
-            
+            System.out.println("------------------------------------------");
+            System.out.println("Which way will you look?");
+            System.out.println("[ L: << Left / C: ^^ Center / R: >> Right ]  (0: Quit)");
+            System.out.print(">> ");
             String input = scanner.nextLine().trim().toUpperCase();
 
             // Handle empty inputS
             if (input.isEmpty()) {
-                System.out.println("Input cannot be empty. Please choose L, C, R, or 0.");
-                continue; 
+                System.out.println("[ERROR] Input cannot be empty. Please choose L, C, R, or 0.");
+                continue;
             }
 
             // Quit condition
             if (input.equals("0")) {
                 System.out.println(" Game Stopped by User.");
-                System.out.println("Final Score: " + score);
+                System.out.println("=== Game Over! Final Score: " + score + " ===");
                 break; // game ends here
             }
 
@@ -57,38 +59,51 @@ public class ChamChamCham implements MiniGame {
 
             String computerDir = directions[random.nextInt(3)];
 
-            System.out.println("You: " + getFullDirectionName(input) 
+            System.out.println("You: " + getFullDirectionName(input)
                     + "  VS  Computer: " + getFullDirectionName(computerDir));
 
+            System.out.print("\nCham... ");
             try {
-                Thread.sleep(500);
+                Thread.sleep(300);
+                System.out.print("Cham... ");
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println("Cham!!\n");
+
+            System.out.println(String.format("   You  %s   VS   %s  Computer",
+                    getFullDirectionName(input), getFullDirectionName(computerDir)));
+            System.out.println("");
 
             // Determine win/loss
             if (input.equals(computerDir)) {
-                System.out.println(" MATCH... You lost.");
-                System.out.println("Game Over! Your Final Score: " + score);
+                System.out.println("(>_<) HIT! You looked the same way...");
+                System.out.println("===========================================");
+                System.out.println("   [X] GAME OVER! Final Score: " + score);
+                System.out.println("===========================================");
                 break;
             } else {
-                System.out.println(" No MATCH! You won this round!");
+                System.out.println("(^_^) DODGE SUCCESS! (+1 Point)");
                 score++;
-                System.out.println("Current Winstreak: " + score);
+                System.out.println("   [ Current Winstreak: " + score + " ]");
             }
         }
-        
+
         return score; // return final score
     }
 
     // Helper method to convert direction code to full name
     private String getFullDirectionName(String code) {
         switch (code) {
-            case "L": return "LEFT";
-            case "C": return "CENTER";
-            case "R": return "RIGHT";
-            default: return "UNKNOWN";
+            case "L":
+                return "<< LEFT";
+            case "C":
+                return "^^ CENTER";
+            case "R":
+                return ">> RIGHT";
+            default:
+                return "UNKNOWN";
         }
     }
 }
-    

@@ -74,8 +74,8 @@ class GameLauncherTest {
 
         assertTrue(output.contains("Registration successful"), "Registration success message should appear.");
         assertTrue(output.contains("Welcome, Tester01"), "Welcome message should include the nickname.");
-        assertTrue(output.contains("Welcome to UpDown"), "Up Down game should be executed."); // Check UpDown class
-                                                                                              // output
+        assertTrue(output.contains("UP  -  AND  -  DOWN"), "Up Down game should be executed."); // Check UpDown class
+                                                                                                // output
         assertTrue(output.contains("Goodbye"), "Application should exit normally.");
     }
 
