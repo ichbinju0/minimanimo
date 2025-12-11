@@ -1,8 +1,9 @@
 package minimanimo.game;
 
-import minimanimo.User;
 import java.util.Random;
 import java.util.Scanner;
+
+import minimanimo.User;
 
 public class RockPaperScissors implements MiniGame {
 
@@ -99,7 +100,8 @@ public class RockPaperScissors implements MiniGame {
             if (userChoice == computerChoice) {
                 System.out.printf(" ( -_-) It's a draw! (+%d point)\n", DRAW_SCORE);
                 currentScore += DRAW_SCORE; // Draw: +1 point
-            } else if (isWin(userChoice, computerChoice)) {
+            } 
+            else if (isWin(userChoice, computerChoice)) {
                 System.out.printf(" (^_^) You won! (+%d points)\n", WIN_SCORE);
                 currentScore += WIN_SCORE; // Win: +3 points
             } else {
