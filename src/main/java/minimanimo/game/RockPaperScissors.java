@@ -43,7 +43,7 @@ public class RockPaperScissors implements MiniGame {
             System.out.println("------------------------------------------");
             System.out.println("Current Score: " + currentScore);
             System.out.println("Choose your weapon:");
-            System.out.println("[ 1. (O) Rock  |  2. [_] Paper  |  3. >8< Scissors ]");
+            System.out.println("[ 1. (●) Rock  |  2. [□] Paper  |  3. [▲] Scissors ]");
             System.out.println("(0. Quit)");
             System.out.print(">> ");
 
@@ -136,11 +136,11 @@ public class RockPaperScissors implements MiniGame {
     private String choiceToString(int choice) {
         switch (choice) {
             case ROCK:
-                return "(O) Rock";
+                return " ● Rock";
             case PAPER:
-                return "[_] Paper";
+                return " □ Paper";
             case SCISSORS:
-                return ">8< Scissors";
+                return " ▲ Scissors";
             default:
                 return "Unknown";
         }
