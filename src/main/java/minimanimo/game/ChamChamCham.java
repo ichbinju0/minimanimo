@@ -68,7 +68,7 @@ public class ChamChamCham implements MiniGame {
                 System.out.print("Cham... ");
                 Thread.sleep(300);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
             System.out.println("Cham!!\n");
 
