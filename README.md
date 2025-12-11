@@ -162,10 +162,10 @@ Our team ensures project stability through a professional collaboration workflow
 
 | Responsibility      | Name           | Email                  |
 |----------------------------|----------------|------------------------|
-| Interface Design (`MiniGame`), `Number Baseball` Logic. | Kim Gyeongyoon | gracekim6531@naver.com |
-| `UserManager` (CSV I/O), `Number UpDown`. | Choi Juyoung | hahalove79@naver.com |
-| `User` Class, `Cham Cham Cham`, Kanban & CI Mgmt. | Kwon Sihyeon | sihyun050305@gmail.com |
-| `GameLauncher` (Menu/Login), `Rock Paper Scissors` | Park Soyeon | amypark310@gmail.com |
+| Interface Design (`MiniGame`), `Number Baseball` Logic, Console UI, Updated README. | Kim Gyeongyoon | gracekim6531@naver.com |
+| `UserManager` (CSV I/O), `Number UpDown`, Console UI, Wrote CODE_OF_CONDUCT. | Choi Juyoung | hahalove79@naver.com |
+| `User` Class, `Cham Cham Cham`, Kanban Mgmt, Code cleanup & organization, Managed LICENSE and .gitignore. | Kwon Sihyeon | sihyun050305@gmail.com |
+| `GameLauncher` (Menu/Login), `Rock Paper Scissors`, Created initial folder & file structure, Wrote CONTRIBUTING.md. | Park Soyeon | amypark310@gmail.com |
 
 
 
