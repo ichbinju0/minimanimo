@@ -82,6 +82,9 @@ Executable output path: `target/minimanimo-1.0-SNAPSHOT.jar`
 java -jar target/minimanimo-1.0-SNAPSHOT.jar
 
 ```
+<img width="450" height="205" alt="KakaoTalk_Photo_2025-12-12-02-47-59" src="https://github.com/user-attachments/assets/2ed6acc9-50a2-4e7c-ac73-37b99547288d" />
+<img width="281" height="568" alt="KakaoTalk_Photo_2025-12-12-02-49-25" src="https://github.com/user-attachments/assets/34f4e3da-6f4a-4d87-b9fc-aa30bc81d91b" />
+<img width="272" height="259" alt="KakaoTalk_Photo_2025-12-12-02-49-32" src="https://github.com/user-attachments/assets/342afca4-fbe4-41ac-8c8c-860847ac47af" />
 
 
 ---
